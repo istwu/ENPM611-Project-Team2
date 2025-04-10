@@ -63,6 +63,7 @@ def analyze_data() :
         for author in sorted(authors):
             f.write(author + "\n")
 
+
 # ==== Identiy bot accounts that have authored events ==== #
 def get_bot_authors(token):
     bots = []
@@ -84,11 +85,11 @@ def get_bot_authors(token):
             if not author_info:
                 continue
 
-            if author_info.get("type") == "Bot" or author_info.get("type") == "Organization":
+            if author_info.get("type") == "Bot":
                 bots.append(author)
 
         # Write to bot_authors.txt
-        with open("text-files/bot_authors.txt", "w", encoding="utf-8") as f:
+        with open("text-files/event_authors_bots.txt", "w", encoding="utf-8") as f:
             for bot in sorted(bots):
                 f.write(bot + "\n")
 
@@ -97,4 +98,4 @@ if __name__ == '__main__':
     analyze_data()
 
     scraper.token = input("Enter GitHub API token: ")
-    get_bot_authors(scraper.token)
+    remove_orgs(scraper.token)

@@ -7,25 +7,28 @@ import scraper
 def analyze_data() :
     issues:List[Issue] = DataLoader().get_issues()
     events = []
-    creators, states, labels, event_types, authors = set(), set(), set(), set(), set()
+    creators, states, issue_labels, event_types, authors, event_labels = set(), set(), set(), set(), set(), set()
     for i in issues:
         events.extend(i.events)
         creators.add(i.creator)
         states.add(i.state)
-        labels.update(i.labels)
+        issue_labels.update(i.labels)
     for e in events:
         event_types.add(e.event_type)
         if e.author:
             authors.add(e.author)
+        if e.label:
+            event_labels.add(e.label)
 
     # =====  Print the number of issues, events, and so on  ==== #
     print("# of issues:", len(issues))
     print("# of events:", len(events))
     print("# of issue creators:", len(creators))
     print("# of states:", len(states))
-    print("# of labels:", len(labels))
+    print("# of issue labels:", len(issue_labels))
     print("# of event types:", len(event_types))
     print("# of event authors:", len(authors))
+    print("# of event labels:", len(event_labels))
 
     # ==== Write data to text files ==== #
     # # Write issues
@@ -48,9 +51,9 @@ def analyze_data() :
         for state in sorted(states):
             f.write(state + "\n")
 
-    # Write labels
-    with open("text-files/labels.txt", "w", encoding="utf-8") as f:
-        for label in sorted(labels):
+    # Write issue labels
+    with open("text-files/issue_labels.txt", "w", encoding="utf-8") as f:
+        for label in sorted(issue_labels):
             f.write(label + "\n")
 
     # Write event types
@@ -62,6 +65,11 @@ def analyze_data() :
     with open("text-files/event_authors.txt", "w", encoding="utf-8") as f:
         for author in sorted(authors):
             f.write(author + "\n")
+
+        # Write event labels
+    with open("text-files/event_labels.txt", "w", encoding="utf-8") as f:
+        for label in sorted(event_labels):
+            f.write(label + "\n")
 
 
 # ==== Identiy bot accounts that have authored events ==== #
@@ -97,5 +105,5 @@ def get_bot_authors(token):
 if __name__ == '__main__':
     analyze_data()
 
-    scraper.token = input("Enter GitHub API token: ")
-    remove_orgs(scraper.token)
+    # scraper.token = input("Enter GitHub API token: ")
+    # remove_orgs(scraper.token)

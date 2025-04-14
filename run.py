@@ -10,7 +10,7 @@ import argparse
 import config
 from example_analysis import ExampleAnalysis
 from feature1 import Feature1
-
+from feature2 import Feature2
 
 def parse_args():
     """
@@ -51,7 +51,7 @@ if args.feature == 0:
 elif args.feature == 1:
     Feature1().run()
 elif args.feature == 2:
-    pass # TODO call second analysis
+    Feature2().run()
 elif args.feature == 3:
     pass # TODO call third analysis
 else:

@@ -1,5 +1,3 @@
-
-
 """
 Starting point of the application. This module is invoked from
 the command line to run the analyses.
@@ -9,9 +7,9 @@ import argparse
 
 import config
 from example_analysis import ExampleAnalysis
-from feature1 import Feature1
-from feature2 import Feature2
-from feature3 import Feature3
+from features.feature1 import Feature1
+from features.feature2 import Feature2
+from features.feature3 import Feature3
 
 
 def parse_args():
@@ -39,7 +37,6 @@ def parse_args():
                     help='Optional parameter for analyses focusing on a specific label')
     
     return ap.parse_args()
-
 
 
 # Parse feature to call from command line arguments

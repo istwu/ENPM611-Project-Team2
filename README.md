@@ -51,14 +51,14 @@ pip install -r requirements.txt
 
 ### Update `poetry.json`
 
-To update `poetry.json` such that the issue data is up to date with those in [python-poetry](https://github.com/python-poetry/poetry/issues), run `scraper.py` with
+`poetry.json` was last updated on 3/24/15.
+
+To fetch the issues created in [python-poetry](https://github.com/python-poetry/poetry/issues) since the last update, run `scraper.py` with
 ```
 python scraper.py
 ```
 
-Before execution, the script will prompt you to input a GitHub API token. (If you do not have one already, they can be generated [here](https://github.com/settings/tokens).) Note that it will take a long time to run due to large number of issues in python-poetry, as well as the API rate limit.
-
-`poetry.json` was last updated on 3/24/15.
+Before execution, the script will prompt you to input a GitHub API token. (If you do not have one already, they can be generated [here](https://github.com/settings/tokens).) Note that it will take a long time to run due to the large number of issues in python-poetry, as well as the GitHub API rate limit.
 
 
 ### Run an analysis

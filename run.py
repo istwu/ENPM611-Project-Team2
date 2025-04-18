@@ -11,6 +11,8 @@ import config
 from example_analysis import ExampleAnalysis
 from feature1 import Feature1
 from feature2 import Feature2
+from feature3 import Feature3
+
 
 def parse_args():
     """
@@ -53,6 +55,6 @@ elif args.feature == 1:
 elif args.feature == 2:
     Feature2().run()
 elif args.feature == 3:
-    pass # TODO call third analysis
+    Feature3().run()
 else:
     print('Need to specify which feature to run with --feature flag.')

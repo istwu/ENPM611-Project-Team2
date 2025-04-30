@@ -1,5 +1,4 @@
 from typing import List
-
 from data_loader import DataLoader
 from model import Issue
 

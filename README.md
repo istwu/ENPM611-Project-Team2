@@ -70,3 +70,12 @@ python run.py --feature FEATURE
 ```
 
 Depending on the feature this will either generate a bar chart showing the results, or take a user input and output the results to the command line.
+
+### Unit testing
+
+Run the unit tests with
+```
+python -m coverage run -m unittest discover -s tests -p "test_*.py"
+```
+
+(More info TBA.)

@@ -31,43 +31,34 @@ def analyze_data() :
     print("# of event labels:", len(event_labels))
 
     # ==== Write data to text files ==== #
-    # # Write issues
-    # with open("text-files/issues.txt", "w", encoding="utf-8") as f:
-    #     for issue in issues:
-    #         f.write(json.dumps(issues, indent=2) + "\n")
-
-    # # Write events
-    # with open("text-files/events.txt", "w", encoding="utf-8") as f:
-    #     for event in events:
-    #         f.write(json.dumps(events, indent=2) + "\n")
 
     # Write issue creators
-    with open("text-files/issue_creators.txt", "w", encoding="utf-8") as f:
+    with open("text_files/issue_creators.txt", "w", encoding="utf-8") as f:
         for creator in sorted(creators):
             f.write(creator + "\n")
 
     # Write states
-    with open("text-files/states.txt", "w", encoding="utf-8") as f:
+    with open("text_files/states.txt", "w", encoding="utf-8") as f:
         for state in sorted(states):
             f.write(state + "\n")
 
     # Write issue labels
-    with open("text-files/issue_labels.txt", "w", encoding="utf-8") as f:
+    with open("text_files/issue_labels.txt", "w", encoding="utf-8") as f:
         for label in sorted(issue_labels):
             f.write(label + "\n")
 
     # Write event types
-    with open("text-files/event_types.txt", "w", encoding="utf-8") as f:
+    with open("text_files/event_types.txt", "w", encoding="utf-8") as f:
         for event_type in sorted(event_types):
             f.write(event_type + "\n")
 
     # Write event authors
-    with open("text-files/event_authors.txt", "w", encoding="utf-8") as f:
+    with open("text_files/event_authors.txt", "w", encoding="utf-8") as f:
         for author in sorted(authors):
             f.write(author + "\n")
 
         # Write event labels
-    with open("text-files/event_labels.txt", "w", encoding="utf-8") as f:
+    with open("text_files/event_labels.txt", "w", encoding="utf-8") as f:
         for label in sorted(event_labels):
             f.write(label + "\n")
 
@@ -76,7 +67,7 @@ def analyze_data() :
 def get_bot_authors(token):
     bots = []
     
-    with open("text-files/event_authors.txt", "r") as file:
+    with open("text_files/event_authors.txt", "r") as file:
         for author in file:
             author = author.strip()
             url = f'https://api.github.com/users/{author}'
@@ -97,7 +88,7 @@ def get_bot_authors(token):
                 bots.append(author)
 
         # Write to bot_authors.txt
-        with open("text-files/event_authors_bots.txt", "w", encoding="utf-8") as f:
+        with open("text_files/event_authors_bots.txt", "w", encoding="utf-8") as f:
             for bot in sorted(bots):
                 f.write(bot + "\n")
 

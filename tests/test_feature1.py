@@ -1,5 +1,5 @@
 import unittest
-from feature1 import Feature1
+from features.feature1 import Feature1
 
 class TestFeature1(unittest.TestCase):
     def test_run_feature(self):  # <-- ✅ must start with 'test_'

@@ -83,9 +83,12 @@ To generate a coverage report, run
 python -m coverage report --omit="test_*"
 ```
 
-Overall, the unit test suite covers the functionality of each of the 3 features, as well as `config.py`, `model.py`, and `dataloader.py`. For the feature tests, we created mock issue data and verified that each feature processes the data as expected. 
+Overall, the unit test suite covers the functionality of each of the 3 features, as well as `config.py`, `model.py`, and `dataloader.py`. For the feature tests, we created mock issue data and verified that each feature processes the data as expected. Some edge cases we tested for each feature include:
+- When issue lists are empty
+- When issues/events lack certain attributes (eg. labels)
+- Unusual capitalization
 
-Testing has revealed a few minor bugs:
+Testing has also revealed a few minor bugs:
 - Feature 1: In the nested for loop, there is no check if labels and events in issue are existing lists (problematic if these fields are None)
 - Feature 2: Filename is not well handled 
 - Feature 3: 

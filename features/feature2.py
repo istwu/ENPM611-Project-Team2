@@ -13,10 +13,14 @@ class Feature2:
     def __init__(self):
         pass
 
+    def get_usernames(self, file):
+        with open(file, "r", encoding="utf-8") as f:
+            return set(line.strip() for line in f)
+
     def run(self):
         ### LOAD BOT USERNAMES ###
-        with open("text_files/event_authors_bots.txt", "r", encoding="utf-8") as f:
-            bot_usernames = set(line.strip() for line in f)
+
+        bot_usernames = self.get_usernames("text_files/event_authors_bots.txt")
 
         ### LOAD ISSUES ###
         issues: List[Issue] = DataLoader().get_issues()

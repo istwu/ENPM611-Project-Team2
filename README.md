@@ -78,4 +78,16 @@ Run the unit tests with
 python -m coverage run -m unittest discover -s tests -p "test_*.py"
 ```
 
-(More info TBA.)
+To generate a coverage report, run
+```
+python -m coverage report --omit="test_*"
+```
+
+Overall, the unit test suite covers the functionality of each of the 3 features, as well as `config.py`, `model.py`, and `dataloader.py`. For the feature tests, we created mock issue data and verified that each feature processes the data as expected. 
+
+Testing has revealed a few minor bugs:
+- Feature 1: In the nested for loop, there is no check if labels and events in issue are existing lists (problematic if these fields are None)
+- Feature 2: Filename is not well handled 
+- Feature 3: 
+  - Unclear if username should be case sensitive or not (no checks for uppercase or lowercase)
+  - No handling for blank username

@@ -51,7 +51,7 @@ pip install -r requirements.txt
 
 ### Update `poetry.json`
 
-`poetry.json` was last updated on 3/24/15.
+`poetry.json` was last updated on 3/24/25.
 
 To fetch the issues created in [python-poetry](https://github.com/python-poetry/poetry/issues) since the last update, run `scraper.py` with
 ```

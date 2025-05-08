@@ -14,7 +14,7 @@ This application includes four files provided from the [original project templat
 - `scraper.py`: Uses the GitHub API to scrape issue data from the [python-poetry](https://github.com/python-poetry/poetry/issues) repo, and outputs it to `poetry.json`.
 - `poetry.json`: JSON file containing all issue data from [python-poetry](https://github.com/python-poetry/poetry/issues).
 - `data_analyzer.py`: Counts the number of issues, events, labels, etc. across `poetry.json` and writes each list to respective text files (all contained in the `text_files` folder). Also contains a function to find bot users from `event_authors.txt` and writes them to `event_authors_bots.txt`.
-- `feature1.py`: Finds issues with which labels (eg. bugs, features) tend to have the largest average number of comments, and displays the top 50 in a bar graph.
+- `feature1.py`: Finds issues with which labels (eg. bugs, features) tend to have the largest average number of events, and displays the top 50 in a bar graph.
 - `feature2.py`: Finds the number of issue events created by each bot account (eg. github-actions\[bot\]), and displays the number of events per bot in an ordered bar graph.
 - `feature3.py`: Prompts the user to input a GitHub username, then counts the total number of issues and events created by that user and prints it to the terminal. 
   - Usernames of issue/event contributors can be found in `text_files/issue_creators.txt` and `text_files/event_authors.txt`.

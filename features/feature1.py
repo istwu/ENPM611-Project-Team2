@@ -8,7 +8,7 @@ from model import Issue
 class Feature1:
     """
     Find what kinds of issues (eg. bugs, features) tend to have 
-    the longest discussions (largest average number of comments)
+    the most user interaction (largest average number of events)
     """
 
     def __init__(self):
@@ -16,26 +16,26 @@ class Feature1:
 
     def run(self):
         ### BASIC STATISTICS
-        # Store each issue's label and number of "comment" events
+        # Store each issue's label and number of events
         issues:List[Issue] = DataLoader().get_issues()
-        labels_comments = {"Labels":[], "Comments":[]}
+        labels_events = {"Labels":[], "Events":[]}
 
         for i in issues:
             for l in i.labels:
-                labels_comments["Labels"].append(l)
-                labels_comments["Comments"].append(len(i.events))
+                labels_events["Labels"].append(l)
+                labels_events["Events"].append(len(i.events))
 
         ### BAR CHART
-        # Display a graph of the top 50 issue labels with the longest average
-        # numbers of comments
+        # Display a graph of the top 50 issue labels with the largest avg
+        # numbers of events
         top_n:int = 50
-        # Create a dataframe out of the labels_comments dict
-        df = pd.DataFrame(labels_comments)
-        # Calculate the average number of comments per label
-        averages = df.groupby('Labels')['Comments'].mean()
+        # Create a dataframe out of the labels_events dict
+        df = pd.DataFrame(labels_events)
+        # Calculate the average number of evnets per label
+        averages = df.groupby('Labels')['Events'].mean()
         # Plot the chart
-        averages.nlargest(top_n).plot(kind='bar', figsize=(14,8), title=f'Top {top_n} Issue Labels with the Largest Avg. Number of Comments', 
-                                      xlabel='Label names', ylabel='Average # of Comments')
+        averages.nlargest(top_n).plot(kind='bar', figsize=(14,8), title=f'Top {top_n} Issue Labels with the Largest Avg. Number of Events', 
+                                      xlabel='Label names', ylabel='Average # of Events')
         plt.xticks(rotation=45, ha='right')
         plt.tight_layout()
         plt.show() 

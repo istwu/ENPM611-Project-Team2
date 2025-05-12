@@ -7,43 +7,47 @@ from model import Issue
 
 class Feature2:
     """
-    Find the number of issue events created by each bot account (eg. github-actions[bot]).
+    Compare event type breakdown for github-actions[bot] and stale[bot].
     """
 
     def __init__(self):
-        pass
+        self.bots = ["github-actions[bot]", "stale[bot]"]
 
     def run(self):
-        ### LOAD BOT USERNAMES ###
-        with open("text_files/event_authors_bots.txt", "r", encoding="utf-8") as f:
-            bot_usernames = set(line.strip() for line in f)
-
         ### LOAD ISSUES ###
         issues: List[Issue] = DataLoader().get_issues()
-        bot_event_counts = {}
+
+        # Count event types for each bot
+        bot_event_type_counts = {bot: {} for bot in self.bots}
 
         for issue in issues:
             for event in issue.events:
-                if event.author in bot_usernames:
-                    bot_event_counts[event.author] = bot_event_counts.get(event.author, 0) + 1
+                if event.author in self.bots:
+                    event_type = event.event_type or "unknown"
+                    current_bot = event.author
+                    bot_event_type_counts[current_bot][event_type] = (
+                        bot_event_type_counts[current_bot].get(event_type, 0) + 1
+                    )
 
-        ### BAR CHART ###
-        # Convert to DataFrame
-        df = pd.DataFrame(list(bot_event_counts.items()), columns=["Bot", "Event Count"])
-        df = df.sort_values(by="Event Count", ascending=False)
+        ### PLOTTING ###
+        fig, axes = plt.subplots(1, 2, figsize=(16, 7))
 
-        # Plot
-        plt.figure(figsize=(14, 8))
-        bars = plt.bar(df["Bot"], df["Event Count"])
-        plt.title("Bot Engagement: Number of Events by Each Bot")
-        plt.xlabel("Bot Username")
-        plt.ylabel("Number of Events Authored")
-        plt.xticks(rotation=45, ha='right')
+        for i, bot in enumerate(self.bots):
+            data = bot_event_type_counts[bot]
+            df = pd.DataFrame(list(data.items()), columns=["Event Type", "Count"])
+            df = df.sort_values(by="Count", ascending=False)
 
-        # Add text labels on top of each bar
-        for bar in bars:
-            height = bar.get_height()
-            plt.text(bar.get_x() + bar.get_width()/2., height + 100, f'{int(height)}', ha='center', va='bottom')
+            bars = axes[i].bar(df["Event Type"], df["Count"])
+            axes[i].set_title(f"Actions of {bot}: Event Type Breakdown")
+            axes[i].set_xlabel("Event Type")
+            axes[i].set_ylabel("Number of Events")
+            axes[i].tick_params(axis='x', rotation=45)
+
+            # Add text labels on bars
+            for bar in bars:
+                height = bar.get_height()
+                axes[i].text(bar.get_x() + bar.get_width()/2., height + 5,
+                             f'{int(height)}', ha='center', va='bottom')
 
         plt.tight_layout()
         plt.show()

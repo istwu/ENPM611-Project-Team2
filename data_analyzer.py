@@ -68,7 +68,10 @@ def get_bot_authors(token):
     bots = []
     
     with open("text_files/event_authors.txt", "r") as file:
+        cnt = 0
         for author in file:
+            print("Author#", cnt)
+            cnt +=1
             author = author.strip()
             url = f'https://api.github.com/users/{author}'
 
@@ -96,5 +99,5 @@ def get_bot_authors(token):
 if __name__ == '__main__':
     analyze_data()
 
-    # scraper.token = input("Enter GitHub API token: ")
-    # remove_orgs(scraper.token)
+    # scraper.token = "PUT TOKEN HERE"
+    # get_bot_authors(scraper.token)
